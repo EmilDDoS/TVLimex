@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 private const val END_POINT = "channels.json"
 
-interface TvApi {
+interface TvApiService {
     @GET(END_POINT)
     suspend fun getTvDto(): TvDto
 }

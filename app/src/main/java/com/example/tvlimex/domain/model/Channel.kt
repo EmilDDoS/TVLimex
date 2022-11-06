@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Channel (
         val id: Int,
-        val name_ru: String,
+        val nameRu: String,
         val image: String,
         val title: String,
         val url: String,

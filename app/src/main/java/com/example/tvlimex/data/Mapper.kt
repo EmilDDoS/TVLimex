@@ -7,7 +7,7 @@ object Mapper {
     fun mapTvDtoToChannel(tvDto: TvDto) = tvDto.channels.map {
         Channel(
             id = it.id,
-            name_ru = it.name_ru,
+            nameRu = it.name_ru,
             image = it.image,
             title = it.current.title,
             url = it.url

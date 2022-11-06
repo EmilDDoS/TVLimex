@@ -1,7 +1,6 @@
 package com.example.tvlimex.presentation.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.*
@@ -47,7 +46,7 @@ class ChannelsRecyclerAdapter : RecyclerView.Adapter<ChannelsRecyclerAdapter.Cha
 
     private fun bind(binding: ChannelItemBinding, channel: Channel, context: Context) {
         setListeners(binding, channel, context)
-        binding.channelNameTextView.text = channel.name_ru
+        binding.channelNameTextView.text = channel.nameRu
         binding.programTextView.text = channel.title
         activeStar(channel.isActiveStar, binding, context)
         Picasso.get()

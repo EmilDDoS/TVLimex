@@ -59,7 +59,7 @@ class FavoriteChannelsFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             viewModel.localChannel.collect {
                 listChannels = it
-                adapter.channelList = it.filter { it -> it.isActiveStar }
+                adapter.channelList = it.filter { channel -> channel.isActiveStar }
             }
         }
     }

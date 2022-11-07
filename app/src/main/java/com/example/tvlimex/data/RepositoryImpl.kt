@@ -23,7 +23,7 @@ class RepositoryImpl(
         localChannelsFlow.setListChannel(list)
     }
 
-    override suspend fun getListChannelsDb(): List<Channel> {
+    override fun getListChannelsDb(): List<Channel> {
         return appDataBase.tvDao().getListChannelsDb().map {
             mapper.mapChannelDbModelToChannel(it)
         }

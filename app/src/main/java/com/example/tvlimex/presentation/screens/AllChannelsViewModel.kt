@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class AllChannelsViewModel(
     private val getChannelUseCase: GetChannelsUseCase,
     private val getLocalChannelsUseCase: GetLocalChannelsUseCase,
-    dbUseCase: DbUseCase
+    private val dbUseCase: DbUseCase
 ) : ViewModel() {
 
     val localChannel = getLocalChannelsUseCase.getLocalListChannel()
@@ -30,4 +30,6 @@ class AllChannelsViewModel(
     fun setListChannels(list: List<Channel>){
         getLocalChannelsUseCase.setLocalListChannel(list)
     }
+
+    fun getListChannelsFromDb() = dbUseCase.getListChannelsDb()
 }

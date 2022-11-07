@@ -6,7 +6,7 @@ import com.example.tvlimex.domain.model.Channel
 
 class DbUseCase(private val repository: Repository) {
 
-    suspend fun getListChannelsDb() = repository.getListChannelsDb()
+    fun getListChannelsDb() = repository.getListChannelsDb()
 
     suspend fun addChannelDb(channel: Channel) {
         repository.addChannelDb(channel)

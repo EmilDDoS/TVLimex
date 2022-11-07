@@ -9,7 +9,7 @@ import androidx.room.Query
 interface TvDao {
 
     @Query("SELECT * FROM channels_table")
-    suspend fun getListChannelsDb(): List<ChannelDbModel>
+    fun getListChannelsDb(): List<ChannelDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addChannelDb(channelEntity: ChannelDbModel)

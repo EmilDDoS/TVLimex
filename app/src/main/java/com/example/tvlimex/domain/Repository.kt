@@ -12,7 +12,7 @@ interface Repository {
 
     fun setListChannel(list: List<Channel>)
 
-    suspend fun getListChannelsDb(): List<Channel>
+    fun getListChannelsDb(): List<Channel>
 
     suspend fun addChannelDb(channel: Channel)
 

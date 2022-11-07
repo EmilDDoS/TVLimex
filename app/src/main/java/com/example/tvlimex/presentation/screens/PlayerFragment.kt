@@ -28,19 +28,22 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        /*requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE*/
         initialPlayer()
     }
 
     private fun initialPlayer() {
         val arg = arguments?.get(KEY_CHANNEL_INFO) as Channel
-        player = ExoPlayer.Builder(requireContext())
+        val context = requireContext()
+        player = ExoPlayer.Builder(context)
             .build()
         binding.playerView.player = player
+
         val mediaItem = MediaItem.Builder()
             .setUri(arg.url)
             .setMimeType(MimeTypes.APPLICATION_M3U8)
             .build()
+
         player.playWhenReady = true
         player.setMediaItem(mediaItem)
         player.prepare()
@@ -49,6 +52,7 @@ class PlayerFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        player.release()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
     }
 }

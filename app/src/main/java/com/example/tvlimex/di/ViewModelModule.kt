@@ -33,7 +33,6 @@ class ViewModelModule {
     @ClassKey(FavoriteChannelsViewModel::class)
     @Provides
     fun getFavoriteChannelsViewModel(
-        getChannelsUseCase: GetChannelsUseCase,
         getLocalChannelsUseCase: GetLocalChannelsUseCase
-    ): ViewModel = FavoriteChannelsViewModel(getChannelsUseCase, getLocalChannelsUseCase)
+    ): ViewModel = FavoriteChannelsViewModel(getLocalChannelsUseCase)
 }

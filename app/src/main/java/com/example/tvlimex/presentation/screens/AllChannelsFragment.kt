@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.tvlimex.R
 import com.example.tvlimex.databinding.FragmentAllChannelsBinding
 import com.example.tvlimex.di.ViewModelFactory
+import com.example.tvlimex.domain.model.Channel
 import com.example.tvlimex.presentation.adapters.ChannelsRecyclerAdapter
 
 const val KEY_CHANNEL_INFO = "ChannelInfo"
@@ -20,6 +21,7 @@ class AllChannelsFragment : Fragment() {
     private lateinit var binding: FragmentAllChannelsBinding
     private val viewModel: AllChannelsViewModel by viewModels { ViewModelFactory() }
     private val adapter = ChannelsRecyclerAdapter()
+    private var listChannels = listOf<Channel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,11 +51,20 @@ class AllChannelsFragment : Fragment() {
     private fun subscribe() {
         lifecycleScope.launchWhenCreated {
             viewModel.localChannel.collect {
-                adapter.channelList = it
                 if (it.isEmpty()) {
                     viewModel.getChannel()
                 }
+                adapter.channelList = it
+                listChannels = it
             }
+        }
+    }
+
+    fun searchChannel(text: String) {
+        if (text.isEmpty()) {
+            subscribe()
+        } else {
+            adapter.channelList = listChannels.filter { it.nameRu.lowercase() == text }
         }
     }
 }

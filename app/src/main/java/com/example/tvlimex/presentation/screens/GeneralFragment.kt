@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.tvlimex.R
@@ -35,6 +36,9 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialViewPager()
+        binding.searchNameChannel.doOnTextChanged { text, _, _, _ ->
+            (fragmentsList[0] as AllChannelsFragment).searchChannel(text.toString().lowercase())
+        }
     }
 
     private fun initialViewPager() {

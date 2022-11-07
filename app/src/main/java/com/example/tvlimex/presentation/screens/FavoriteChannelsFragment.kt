@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.tvlimex.R
 import com.example.tvlimex.databinding.FragmentFavoriteChannelsBinding
 import com.example.tvlimex.di.ViewModelFactory
+import com.example.tvlimex.domain.model.Channel
 import com.example.tvlimex.presentation.adapters.ChannelsRecyclerAdapter
 
 class FavoriteChannelsFragment : Fragment() {
@@ -18,6 +19,7 @@ class FavoriteChannelsFragment : Fragment() {
     private val adapter = ChannelsRecyclerAdapter()
     private lateinit var binding: FragmentFavoriteChannelsBinding
     val viewModel: FavoriteChannelsViewModel by viewModels { ViewModelFactory() }
+    private var listChannels = listOf<Channel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,11 +43,22 @@ class FavoriteChannelsFragment : Fragment() {
             requireActivity().findNavController(R.id.nav_host)
                 .navigate(R.id.playerFragment, bundle)
         }
+
+        adapter.onStarClickListener = { channel->
+            val list = listChannels.map {
+                if (it.id == channel.id) {
+                    it.isActiveStar = !it.isActiveStar
+                }
+                it
+            }
+            viewModel.setListChannels(list)
+        }
     }
 
     private fun subscribe() {
         lifecycleScope.launchWhenCreated {
             viewModel.localChannel.collect {
+                listChannels = it
                 adapter.channelList = it.filter { it -> it.isActiveStar }
             }
         }

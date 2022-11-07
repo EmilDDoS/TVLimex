@@ -23,7 +23,7 @@ class ChannelsRecyclerAdapter : RecyclerView.Adapter<ChannelsRecyclerAdapter.Cha
 
     var onChannelItemClickListener: ((Channel) -> Unit)? = null
 
-    var onStarClickListener: ((List<Channel>) -> Unit)? = null
+    var onStarClickListener: ((Channel) -> Unit)? = null
 
     class ChannelsViewHolder(view: ChannelItemBinding) : RecyclerView.ViewHolder(view.root) {
         val binding = ChannelItemBinding.bind(view.root)
@@ -62,14 +62,9 @@ class ChannelsRecyclerAdapter : RecyclerView.Adapter<ChannelsRecyclerAdapter.Cha
         }
 
         binding.imageFavorite.setOnClickListener {
-            val list = channelList.map {
-                if (it.id == channel.id) {
-                    it.isActiveStar = !it.isActiveStar
-                }
-                it
-            }
-            activeStar(channel.isActiveStar, binding, context)
-            onStarClickListener?.invoke(list)
+            val status = !channel.isActiveStar
+            activeStar(status, binding, context)
+            onStarClickListener?.invoke(channel)
         }
     }
 

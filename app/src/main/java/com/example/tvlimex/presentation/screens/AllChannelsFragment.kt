@@ -45,7 +45,16 @@ class AllChannelsFragment : Fragment() {
             requireActivity().findNavController(R.id.nav_host)
                 .navigate(R.id.playerFragment, bundle)
         }
-        adapter.onStarClickListener = { viewModel.setListChannels(it) }
+
+        adapter.onStarClickListener = { channel->
+            val list = listChannels.map {
+                if (it.id == channel.id) {
+                    it.isActiveStar = !it.isActiveStar
+                }
+                it
+            }
+            viewModel.setListChannels(list)
+        }
     }
 
     private fun subscribe() {
@@ -54,8 +63,8 @@ class AllChannelsFragment : Fragment() {
                 if (it.isEmpty()) {
                     viewModel.getChannel()
                 }
-                adapter.channelList = it
                 listChannels = it
+                adapter.channelList = it
             }
         }
     }

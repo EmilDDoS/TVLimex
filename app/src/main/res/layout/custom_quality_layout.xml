@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="androidx.cardview.widget.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:background="@color/custom_quality_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonFullHd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:textColor="@color/custom_quality_button_text_color"
+            android:layout_marginBottom="1dp"
+            android:textSize="16sp"
+            android:text="@string/full_hd" />
+
+        <Button
+            android:id="@+id/buttonHd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/custom_quality_button_text_color"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:textSize="16sp"
+            android:text="@string/hd" />
+
+        <Button
+            android:id="@+id/buttonVga"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/custom_quality_button_text_color"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:textSize="16sp"
+            android:text="@string/vga" />
+
+        <Button
+            android:id="@+id/buttonNHD"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/custom_quality_button_text_color"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:textSize="16sp"
+            android:text="@string/nhd" />
+
+        <Button
+            android:id="@+id/buttonAuto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/custom_quality_button_text_color"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="@string/auto" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</merge>

@@ -6,6 +6,11 @@
     <string name="channelname">ChannelName</string>
     <string name="program">Program</string>
     <string name="hint_text_time_player">Осталось 12 минут</string>
+    <string name="auto">AUTO</string>
+    <string name="nhd">360p</string>
+    <string name="vga">480p</string>
+    <string name="hd">720p</string>
+    <string name="full_hd">1080p</string>
 
     <string-array name="tab_titles">
         <item>@string/tab_all</item>

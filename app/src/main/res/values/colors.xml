@@ -11,4 +11,7 @@
     <color name="text_grey">#404247</color>
     <color name="fragment_background_grey">#343438</color>
     <color name="tab_indicator_color">#0077FF</color>
+    <color name="custom_quality_background">#D8E1E6</color>
+    <color name="custom_quality_button_background">#0077FF</color>
+    <color name="custom_quality_button_text_color">#B2000000</color>
 </resources>

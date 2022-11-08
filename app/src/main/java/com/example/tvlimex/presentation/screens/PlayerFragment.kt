@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tvlimex.R
 import com.example.tvlimex.databinding.FragmentPlayerBinding
 import com.example.tvlimex.domain.model.Channel
+import com.example.tvlimex.presentation.utils.CustomQualityView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.MimeTypes
@@ -28,6 +30,7 @@ class PlayerFragment : Fragment() {
     private lateinit var imageIcon: ImageView
     private lateinit var backButton: ImageView
     private lateinit var qualityButton: ImageView
+    private lateinit var customQuality: CustomQualityView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +44,7 @@ class PlayerFragment : Fragment() {
             imageIcon = this.findViewById(R.id.channelImage)
             backButton = this.findViewById(R.id.backButton)
             qualityButton = this.findViewById(R.id.qualityButton)
+            customQuality = this.findViewById(R.id.customQualityView)
         }
         return binding.root
     }
@@ -85,6 +89,9 @@ class PlayerFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        qualityButton.setOnClickListener {
+            customQuality.isVisible = !customQuality.isVisible
+        }
     }
 
     override fun onStop() {

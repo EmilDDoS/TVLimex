@@ -2,7 +2,6 @@ package com.example.tvlimex.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.tvlimex.data.LocalChannelsFlow
 import com.example.tvlimex.data.Mapper
 import com.example.tvlimex.data.db.AppDataBase
 import com.example.tvlimex.data.network.TvApiService
@@ -20,9 +19,6 @@ class DataModule {
 
     @Provides
     fun provideMapper() = Mapper
-
-    @Provides
-    fun provideLocalChannelsFlow() = LocalChannelsFlow
 
     @Singleton
     @Provides

@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tvlimex.domain.model.Channel
 import com.example.tvlimex.domain.usecase.DbUseCase
 import com.example.tvlimex.domain.usecase.GetChannelsUseCase
-import com.example.tvlimex.domain.usecase.GetLocalChannelsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +12,6 @@ import kotlinx.coroutines.launch
 
 class AllChannelsViewModel(
     private val getChannelUseCase: GetChannelsUseCase,
-    private val getLocalChannelsUseCase: GetLocalChannelsUseCase,
     private val dbUseCase: DbUseCase
 ) : ViewModel() {
 

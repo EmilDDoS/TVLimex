@@ -3,7 +3,6 @@ package com.example.tvlimex.di
 import androidx.lifecycle.ViewModel
 import com.example.tvlimex.domain.usecase.DbUseCase
 import com.example.tvlimex.domain.usecase.GetChannelsUseCase
-import com.example.tvlimex.domain.usecase.GetLocalChannelsUseCase
 import com.example.tvlimex.presentation.screens.AllChannelsViewModel
 import com.example.tvlimex.presentation.screens.FavoriteChannelsViewModel
 import com.example.tvlimex.presentation.screens.GeneralViewModel
@@ -26,15 +25,13 @@ class ViewModelModule {
     @Provides
     fun getAllChannelsViewModel(
         getChannelsUseCase: GetChannelsUseCase,
-        getLocalChannelsUseCase: GetLocalChannelsUseCase,
         dbUseCase: DbUseCase
-    ): ViewModel = AllChannelsViewModel(getChannelsUseCase, getLocalChannelsUseCase, dbUseCase)
+    ): ViewModel = AllChannelsViewModel(getChannelsUseCase, dbUseCase)
 
     @IntoMap
     @ClassKey(FavoriteChannelsViewModel::class)
     @Provides
     fun getFavoriteChannelsViewModel(
-        getLocalChannelsUseCase: GetLocalChannelsUseCase,
         dbUseCase: DbUseCase
-    ): ViewModel = FavoriteChannelsViewModel(getLocalChannelsUseCase, dbUseCase)
+    ): ViewModel = FavoriteChannelsViewModel( dbUseCase)
 }

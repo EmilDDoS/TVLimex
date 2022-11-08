@@ -34,6 +34,7 @@ class DataModule {
             .create(TvApiService::class.java)
     }
 
+    @Singleton
     @Provides
     fun provideDataBase(
         app: Context

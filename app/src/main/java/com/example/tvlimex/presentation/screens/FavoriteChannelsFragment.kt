@@ -19,7 +19,6 @@ class FavoriteChannelsFragment : Fragment() {
     private val adapter = ChannelsRecyclerAdapter()
     private lateinit var binding: FragmentFavoriteChannelsBinding
     val viewModel: FavoriteChannelsViewModel by viewModels { ViewModelFactory() }
-    private var listChannels = listOf<Channel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,21 +44,14 @@ class FavoriteChannelsFragment : Fragment() {
         }
 
         adapter.onStarClickListener = { channel->
-            val list = listChannels.map {
-                if (it.id == channel.id) {
-                    it.isActiveStar = !it.isActiveStar
-                }
-                it
-            }
-            viewModel.setListChannels(list)
+            viewModel.deleteChannelDb(channel.id)
         }
     }
 
     private fun subscribe() {
         lifecycleScope.launchWhenCreated {
-            viewModel.localChannel.collect {
-                listChannels = it
-                adapter.channelList = it.filter { channel -> channel.isActiveStar }
+            viewModel.getListDb().collect{
+                adapter.channelList = it
             }
         }
     }

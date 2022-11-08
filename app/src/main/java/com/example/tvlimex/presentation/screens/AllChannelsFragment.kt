@@ -22,6 +22,7 @@ class AllChannelsFragment : Fragment() {
     private val viewModel: AllChannelsViewModel by viewModels { ViewModelFactory() }
     private val adapter = ChannelsRecyclerAdapter()
     private var listChannels = listOf<Channel>()
+    private var listChannelsDb = listOf<Channel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,7 @@ class AllChannelsFragment : Fragment() {
         binding.recyclerAllChannels.adapter = adapter
         setListenerAdapter()
         subscribe()
+        viewModel.getChannel()
     }
 
     private fun setListenerAdapter() {
@@ -46,27 +48,42 @@ class AllChannelsFragment : Fragment() {
                 .navigate(R.id.playerFragment, bundle)
         }
 
-        adapter.onStarClickListener = { channel->
-            val list = listChannels.map {
-                if (it.id == channel.id) {
-                    it.isActiveStar = !it.isActiveStar
-                }
-                it
+        adapter.onStarClickListener = {
+            if (it.isActiveStar) {
+                viewModel.deleteChanel(it.id)
+            } else {
+                viewModel.addChannelDb(it)
             }
-            viewModel.setListChannels(list)
+
         }
     }
 
     private fun subscribe() {
         lifecycleScope.launchWhenCreated {
-            viewModel.localChannel.collect {
-                if (it.isEmpty()) {
-                    viewModel.getChannel()
-                }
+            viewModel.channelList.collect {
                 listChannels = it
-                adapter.channelList = it
+                setData()
             }
         }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.getListChannelsFromDb().collect {
+                listChannelsDb = it
+                setData()
+            }
+        }
+    }
+
+    private fun setData(){
+        listChannels.forEach {
+            it.isActiveStar = false
+            listChannelsDb.forEach { channelDb->
+                if (channelDb.id == it.id){
+                    it.isActiveStar = true
+                }
+            }
+        }
+        adapter.channelList = listChannels
     }
 
     fun searchChannel(text: String) {

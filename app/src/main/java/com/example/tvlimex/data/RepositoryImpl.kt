@@ -4,6 +4,9 @@ import com.example.tvlimex.data.db.AppDataBase
 import com.example.tvlimex.data.network.TvApiService
 import com.example.tvlimex.domain.Repository
 import com.example.tvlimex.domain.model.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 
 class RepositoryImpl(
     private val tvApi: TvApiService,
@@ -23,9 +26,11 @@ class RepositoryImpl(
         localChannelsFlow.setListChannel(list)
     }
 
-    override fun getListChannelsDb(): List<Channel> {
+    override suspend fun getListChannelsDb(): Flow<List<Channel>> {
         return appDataBase.tvDao().getListChannelsDb().map {
-            mapper.mapChannelDbModelToChannel(it)
+            it.map { channelDb ->
+                mapper.mapChannelDbModelToChannel(channelDb)
+            }
         }
     }
 

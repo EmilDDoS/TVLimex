@@ -62,9 +62,9 @@ class ChannelsRecyclerAdapter : RecyclerView.Adapter<ChannelsRecyclerAdapter.Cha
         }
 
         binding.imageFavorite.setOnClickListener {
-            val status = !channel.isActiveStar
-            activeStar(status, binding, context)
             onStarClickListener?.invoke(channel)
+            channel.isActiveStar = !channel.isActiveStar
+            activeStar(channel.isActiveStar, binding, context)
         }
     }
 

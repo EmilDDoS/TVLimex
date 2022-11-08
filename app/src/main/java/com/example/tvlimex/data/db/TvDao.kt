@@ -4,12 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface TvDao {
 
     @Query("SELECT * FROM channels_table")
-    fun getListChannelsDb(): List<ChannelDbModel>
+    fun getListChannelsDb(): Flow<List<ChannelDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addChannelDb(channelEntity: ChannelDbModel)

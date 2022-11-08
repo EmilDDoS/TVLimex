@@ -6,6 +6,9 @@ import com.example.tvlimex.domain.model.Channel
 import com.example.tvlimex.domain.usecase.DbUseCase
 import com.example.tvlimex.domain.usecase.GetChannelsUseCase
 import com.example.tvlimex.domain.usecase.GetLocalChannelsUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AllChannelsViewModel(
@@ -14,22 +17,32 @@ class AllChannelsViewModel(
     private val dbUseCase: DbUseCase
 ) : ViewModel() {
 
-    val localChannel = getLocalChannelsUseCase.getLocalListChannel()
+    private val _channelsList = MutableStateFlow(listOf<Channel>())
+    val channelList: StateFlow<List<Channel>>
+        get() = _channelsList.asStateFlow()
 
     fun getChannel() {
         viewModelScope.launch {
             try {
                 val result = getChannelUseCase.getChannels()
-                setListChannels(result)
+                _channelsList.tryEmit(result)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    fun setListChannels(list: List<Channel>){
-        getLocalChannelsUseCase.setLocalListChannel(list)
+    suspend fun getListChannelsFromDb() = dbUseCase.getListChannelsDb()
+
+    fun addChannelDb(channel: Channel){
+        viewModelScope.launch {
+            dbUseCase.addChannelDb(channel)
+        }
     }
 
-    fun getListChannelsFromDb() = dbUseCase.getListChannelsDb()
+    fun deleteChanel(id: Int){
+        viewModelScope.launch {
+            dbUseCase.deleteChannelItem(id)
+        }
+    }
 }

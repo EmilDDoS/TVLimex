@@ -5,6 +5,7 @@
     <string name="tab_favorite">Избранное</string>
     <string name="channelname">ChannelName</string>
     <string name="program">Program</string>
+    <string name="hint_text_time_player">Осталось 12 минут</string>
 
     <string-array name="tab_titles">
         <item>@string/tab_all</item>

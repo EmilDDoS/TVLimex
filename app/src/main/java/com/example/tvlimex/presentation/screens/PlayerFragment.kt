@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -47,6 +48,9 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        requireActivity().window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         val channel = arguments?.get(KEY_CHANNEL_INFO) as Channel
         initialPlayer(channel)
         fillCustomPlayer(channel)
@@ -80,6 +84,7 @@ class PlayerFragment : Fragment() {
         backButton.setOnClickListener {
             findNavController().navigateUp()
         }
+
     }
 
     override fun onStop() {
